@@ -8,7 +8,7 @@ The admin page is at `sc18gah.pythonanywhere.com/admin/` \
 The admin username is `ammar` and the password is `ammar` \
 The 2 students I set up are called `student1` and `student2` with matching passwords `student1` and `student2`
 
-If you type anything wrong you will be shown the help grid above. Ensure your client is at least 120 characters wide for correct format!!
+If you type anything wrong you will be shown the help grid below. Ensure your client is at least 120 characters wide for correct format!!
 
 # 2. Using the Client
 
