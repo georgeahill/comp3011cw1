@@ -10,6 +10,8 @@ The 2 students I set up are called `student1` and `student2` with matching passw
 
 If you type anything wrong you will be shown the help grid below. Ensure your client is at least 120 characters wide for correct format!!
 
+You will need to run `pip install -r requirements.txt` prior to running the application.
+
 # 2. Using the Client
 
 Run the client code (`python app.py`), then either type `help` at the prompt or read the below:

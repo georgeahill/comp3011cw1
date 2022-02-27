@@ -9,6 +9,11 @@ The admin username is `ammar` and the password is `ammar` \
 The 2 students I set up are called `student1` and `student2` with matching passwords `student1` and `student2`
 
 If you type anything wrong you will be shown the help grid below. Ensure your client is at least 120 characters wide for correct format!!
+<<<<<<< Updated upstream
+=======
+
+You will need to run `pip install -r requirements.txt` prior to running the application.
+>>>>>>> Stashed changes
 
 # 2. Using the Client
 
