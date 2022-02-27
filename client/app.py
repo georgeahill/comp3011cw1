@@ -4,6 +4,7 @@ import urllib
 import functools
 import requests
 from tabulate import tabulate
+import textwrap
 
 url = None
 
@@ -19,8 +20,25 @@ def assert_url(func):
     return ensure
 
 
-def help():
-    print("HELP")
+def help(is_mistake = False):
+    headers = ["Command Syntax", "Description"]
+    help_table = [
+        ["help", "Display this help text"],
+        ["register", "This is used to allow a user to register to the service using a username, email and a password. When the command is invoked, the program prompts the user to enter the username, email, and password of the new user."],
+        ["login <url>", "This command is used to log in to the service. Invoking this command will prompt the user to enter a username and password which are then sent to the service for authentication"],
+        ["logout", "This causes the user to logout from the current session"],
+        ["list", "This is used to view a list of all module instances and the professor(s) teaching each of them (Option 1)"],
+        ["view", "This command is used to view the rating of all professors (Option 2)"],
+        ["average <professor_code> <module_code>", "This command is used to view the average rating of a certain professor in a certain module (Option 3)"],
+        ["rate <prof_code> <mod_code> <year> <semester> <rating>", "This is used to rate the teaching of a certain professor in a certain module instance (Option 4). Year is a 4 digit year, semester is either 1 or 2, rating is an integer between 1 and 5 inclusive"],
+    ]
+
+    # 59 for a line limit of 120 chars
+    help_table = [[a, '\n'.join(textwrap.wrap(b, width=59))] for a, b in help_table]
+
+    if is_mistake:
+        print("\nLooks like you may have entered an invalid command!\nUsage:\n")
+    print(tabulate(help_table, headers=headers, tablefmt='grid'))
 
 
 def get_creds_from_user():
@@ -48,7 +66,7 @@ def register(sess):
 
     try:
         resp = sess.post(
-            urllib.parse.urljoin(url, "/register/"),
+            urllib.parse.urljoin(url, "/account/register/"),
             data={"username": username, "password": password, "email": email},
         )
         if resp.status_code == 200:
@@ -66,7 +84,7 @@ def login(sess, _url):
     username, password = get_creds_from_user()
     try:
         resp = sess.post(
-            urllib.parse.urljoin(url, "/login/"),
+            urllib.parse.urljoin(url, "/account/login/"),
             data={"username": username, "password": password},
         )
         if resp.status_code == 200:
@@ -80,7 +98,10 @@ def login(sess, _url):
 @assert_url
 def logout(sess):
     global url
-    sess.get(urllib.parse.urljoin(url, "/logout/"))
+    try:
+        sess.get(urllib.parse.urljoin(url, "/account/logout/"))
+    except:
+        print("Error logging out!")
     url = None
     print("Successfully logged out")
 
@@ -160,7 +181,7 @@ def main_loop():
                     processed_command = True
                     break
             if not processed_command:
-                help()
+                help(True)
 
             choice = input("> ")
 

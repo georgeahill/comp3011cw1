@@ -90,19 +90,6 @@ def HandleTeachingListRequest(request):
     return HttpResponse(json.dumps(outvals))
 
 
-def HandleProfessorRatingListRequest(request):
-    professors = Professor.objects.all()
-
-    outvals = []
-
-    for professor in professors:
-        outvals.append(
-            f"The rating for {professor} is {GetProfessorRating(professor.code)}"
-        )
-
-    return HttpResponse(json.dumps(outvals))
-
-
 def GetProfessorRating(professor_id, module_id=None):
     if module_id:
         teachings = Teaching.objects.filter(

@@ -20,7 +20,6 @@ from default.views import (
     HandleRegisterRequest,
     HandleTeachingListRequest,
     HandleProfessorRatingListRequest,
-    HandleProfessorRatingRequest,
     HandleProfessorModuleRatingRequest,
     HandleLoginRequest,
     HandleLogoutRequest,
@@ -30,12 +29,11 @@ handler500 = 'default.views.Handle500'
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("login/", HandleLoginRequest),
-    path("logout/", HandleLogoutRequest),
-    path("register/", HandleRegisterRequest),
+    path("account/login/", HandleLoginRequest),
+    path("account/logout/", HandleLogoutRequest),
+    path("account/register/", HandleRegisterRequest),
     path("api/modules/", HandleTeachingListRequest),
     path("api/rating/", HandleProfessorRatingListRequest),
-    path("api/rating/<professor_id>/", HandleProfessorRatingRequest),
     path(
         "api/rating/<professor_id>/module/<module_id>/",
         HandleProfessorModuleRatingRequest,
