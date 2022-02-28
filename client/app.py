@@ -90,7 +90,7 @@ def login(sess, _url):
         if resp.status_code == 200:
             print("Successfully logged in")
         else:
-            print("Unable to log in")
+            print("Unable to log in", resp.status_code)
     except Exception as e:
         print("Unable to login!")
 
